@@ -7,7 +7,6 @@ metadata:
     team: fager
 spec:
   image: {{ image }}
-  team: fager
   port: 8080
   ingresses:
     - https://arbeidsgiver.nais.adeo.no/arbeidsgiver-arbeidsforhold-api/

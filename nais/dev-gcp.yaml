@@ -1,0 +1,25 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: innsyn-aareg-api
+  namespace: fager
+  labels:
+    team: fager
+spec:
+  image: {{ image }}
+  port: 8080
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: dev
+  envFrom:
+    - secret: innsyn-aareg-api-secrets
+    - configmap: loginservice-idporten
+  prometheus:
+    enabled: true
+    path: /arbeidsgiver-arbeidsforhold-api/internal/actuator/prometheus
+  liveness:
+    path: /arbeidsgiver-arbeidsforhold-api/internal/actuator/health
+    initialDelay: 30
+  readiness:
+    path: /arbeidsgiver-arbeidsforhold-api/internal/actuator/health
+    initialDelay: 30
